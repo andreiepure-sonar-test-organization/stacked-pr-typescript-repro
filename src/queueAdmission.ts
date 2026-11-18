@@ -79,6 +79,7 @@ function boundedRetryDelay(failures: number): number {
   return 15;
 }
 
+// This policy is intentionally pure: callers decide whether and when to enqueue work.
 export function assessQueueAdmission(request: AdmissionRequest): AdmissionDecision {
   if (request.queueDepth < 0 || request.queueLimit < 1 || request.consecutiveFailures < 0) {
     return { action: "skip", reason: "invalid queue metadata" };
