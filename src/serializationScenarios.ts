@@ -126,6 +126,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "pending" },
     expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "azure-default-draft-requires-review",
+    input: { ...readyQueueInput, platform: "azure", isDefaultBranch: true, isDraft: true },
+    expected: { action: "wait", reason: "azure_draft_requires_review", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
