@@ -102,6 +102,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 0 },
     expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "draft-pull-request-waits-for-review",
+    input: { ...readyQueueInput, isDraft: true },
+    expected: { action: "wait", reason: "draft_pull_request", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
