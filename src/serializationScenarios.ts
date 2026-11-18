@@ -84,6 +84,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "gitlab", changedFiles: 0 },
     expected: { action: "skip", reason: "empty_gitlab_change", priority: 0, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "newer-revision-supersedes-old-result",
+    input: { ...completedPullRequest, wasSuperseded: true, hasNewerRevision: true },
+    expected: { action: "skip", reason: "newer_revision_superseded_result", priority: 0, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
