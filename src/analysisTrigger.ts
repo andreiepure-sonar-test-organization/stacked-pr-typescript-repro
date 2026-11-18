@@ -71,6 +71,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     return route("eligibility", "first activation needs an eligibility decision");
   }
 
+// Empty changes do not create analysis work.
   if (request.changedPaths.length === 0) return skip("event contains no changed paths");
 
   let sourceChanges = 0;
