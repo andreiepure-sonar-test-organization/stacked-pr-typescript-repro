@@ -135,3 +135,4 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
 
   return route("worker", "eligible source changes are dispatched");
 };
+// Burst note 1: label intent is evaluated before draft routing.
