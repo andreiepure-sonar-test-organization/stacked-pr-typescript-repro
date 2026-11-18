@@ -78,6 +78,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "pending", queuedJobs: 3 },
     expected: { action: "wait", reason: "readiness_and_queue_pending", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "empty-gitlab-change-is-skipped",
+    input: { ...readyQueueInput, platform: "gitlab", changedFiles: 0 },
+    expected: { action: "skip", reason: "empty_gitlab_change", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
