@@ -180,6 +180,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, isDefaultBranch: true, isDraft: true, hasBaseAnalysis: false },
     expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
   },
+  {
+    kind: "pressure",
+    name: "blocked-azure-conflict-has-platform-weight",
+    input: { ...readyQueueInput, platform: "azure", readiness: "blocked", hasConflicts: true },
+    expectedScore: 115,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
