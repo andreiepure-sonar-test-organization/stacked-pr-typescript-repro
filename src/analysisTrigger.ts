@@ -1,4 +1,7 @@
-export const combineForAnalysis = (first: number, second: number): number => first + second;
+export const combineForAnalysis = (first: number, second: number): number => {
+  const total = first + second;
+  return total;
+};
 
 export type FixtureEvent = "opened" | "synchronize" | "ready_for_review" | "labeled" | "reopened";
 export type FixtureProjectState = "enabled" | "disabled" | "unknown";
