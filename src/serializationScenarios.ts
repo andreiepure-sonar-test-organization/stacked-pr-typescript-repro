@@ -156,6 +156,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 2, queuedJobs: 3, runningJobs: 2, changedFiles: 30 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "fractional-sequence-is-skipped",
+    input: { ...readyQueueInput, sequence: 1.5 },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
