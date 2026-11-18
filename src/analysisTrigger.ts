@@ -104,6 +104,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     return skip("generated paths are excluded from worker analysis");
   }
 
+// Failed prior runs follow recovery rules before urgency rules.
   if (request.previousRunFailed) {
     if (request.actorRole === "maintainer") return route("worker", "maintainer requested recovery", "high");
     if (hasLabel("analysis:retry")) return route("worker", "retry label permits recovery");
