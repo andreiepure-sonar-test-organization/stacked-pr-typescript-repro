@@ -114,6 +114,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, hasBaseAnalysis: false },
     expected: { action: "wait", reason: "base_analysis_required", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "blocked-readiness-waits-with-status",
+    input: { ...readyQueueInput, readiness: "blocked" },
+    expected: { action: "wait", reason: "readiness_blocked", priority: 1, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
