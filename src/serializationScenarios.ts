@@ -198,6 +198,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, analysisFinished: false },
     expected: { action: "wait", reason: "analysis_still_running", priority: 1, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "github-pull-request-waits-for-missing-report",
+    input: { ...completedPullRequest, reportAvailable: false },
+    expected: { action: "wait", reason: "github_report_not_ready", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
