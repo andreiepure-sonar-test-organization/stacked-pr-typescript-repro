@@ -72,6 +72,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "blocked", hasConflicts: true },
     expected: { action: "skip", reason: "conflicts_block_analysis", priority: 0, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "pending-readiness-waits-behind-queued-jobs",
+    input: { ...readyQueueInput, readiness: "pending", queuedJobs: 3 },
+    expected: { action: "wait", reason: "readiness_and_queue_pending", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
