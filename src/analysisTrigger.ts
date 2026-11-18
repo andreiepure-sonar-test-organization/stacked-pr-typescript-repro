@@ -143,3 +143,4 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
 // Burst note 6: configuration changes remain opt-in.
 // Burst note 7: failed-run recovery precedes urgency routing.
 // Burst note 8: untrusted automation is not dispatched by default.
+// Burst note 9: route helpers return plan data instead of acting.
