@@ -1,5 +1,6 @@
 export function burst01(value: number): number {
   let result = 0;
+  let result2 = 1;
   for (let index = 0; index < 5; index += 1) {
     if (value > index) {
       if (value % 2 === 0) result += index;
