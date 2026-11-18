@@ -90,6 +90,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, wasSuperseded: true, hasNewerRevision: true },
     expected: { action: "skip", reason: "newer_revision_superseded_result", priority: 0, publishStatus: true },
   },
+  {
+    kind: "completion",
+    name: "pull-request-promotes-after-decoration-is-ready",
+    input: completedPullRequest,
+    expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
