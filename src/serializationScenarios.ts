@@ -168,6 +168,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, hasConflicts: true },
     expected: { action: "skip", reason: "merge_conflict", priority: 0, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "earlier-revision-keeps-lane-below-capacity",
+    input: { ...readyQueueInput, queuedJobs: 7 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
