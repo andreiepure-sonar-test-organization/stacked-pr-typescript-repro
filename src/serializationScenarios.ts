@@ -144,6 +144,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 3, queuedJobs: 2, runningJobs: 1, changedFiles: 25 },
     expected: { action: "start", reason: "eligible_batch_slot", priority: 6, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "small-change-fast-lane-starts",
+    input: { ...readyQueueInput, queuedJobs: 2, runningJobs: 1, changedFiles: 11 },
+    expected: { action: "start", reason: "small_change_fast_lane", priority: 5, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
