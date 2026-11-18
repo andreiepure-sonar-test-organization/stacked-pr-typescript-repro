@@ -62,6 +62,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     if (!hasLabel("analysis:stacked")) return skip("new non-default branch is not in the stack");
   }
 
+// Project state is resolved before changed-file routing.
   if (request.projectState === "disabled") return skip("project analysis is disabled");
   if (request.projectState === "unknown") {
     if (request.branch !== request.defaultBranch) return skip("activation is limited to the default branch");
