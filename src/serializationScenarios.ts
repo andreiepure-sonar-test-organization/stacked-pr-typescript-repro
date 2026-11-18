@@ -186,6 +186,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "azure", readiness: "blocked", hasConflicts: true },
     expectedScore: 115,
   },
+  {
+    kind: "pressure",
+    name: "default-first-analysis-uses-even-sequence-pressure",
+    input: { ...readyQueueInput, sequence: 2, isDefaultBranch: true, hasBaseAnalysis: false },
+    expectedScore: 1,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
