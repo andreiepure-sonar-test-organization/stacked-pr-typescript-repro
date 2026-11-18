@@ -60,6 +60,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, hasBaseAnalysis: false, isDefaultBranch: true },
     expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
   },
+  {
+    kind: "pressure",
+    name: "blocked-conflict-adds-high-queue-pressure",
+    input: { ...readyQueueInput, readiness: "blocked", hasConflicts: true },
+    expectedScore: 113,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
