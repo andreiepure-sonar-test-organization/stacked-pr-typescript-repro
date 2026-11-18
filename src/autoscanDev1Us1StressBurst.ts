@@ -10,3 +10,4 @@ export const autoscanDev1Us1StressBurstCommit09 = "Dev1US1 stress burst commit 0
 export const autoscanDev1Us1StressBurstCommit10 = "Dev1US1 stress burst commit 10";
 export const autoscanDev1Us1StressBurstCommit11 = "Dev1US1 stress burst commit 11";
 export const autoscanDev1Us1StressBurstCommit12 = "Dev1US1 stress burst commit 12";
+export const autoscanDev1Us1StressBurstCommit13 = "Dev1US1 stress burst commit 13";
