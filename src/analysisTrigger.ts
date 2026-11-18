@@ -74,6 +74,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
 // Empty changes do not create analysis work.
   if (request.changedPaths.length === 0) return skip("event contains no changed paths");
 
+// Classify source, generated, documentation, and configuration paths before routing.
   let sourceChanges = 0;
   let generatedChanges = 0;
   let configurationChanges = 0;
