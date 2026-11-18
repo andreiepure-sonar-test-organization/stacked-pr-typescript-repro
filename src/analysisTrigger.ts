@@ -140,3 +140,4 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
 // Burst note 3: stack state remains an explicit request input.
 // Burst note 4: empty change sets stay excluded from dispatch.
 // Burst note 5: generated-path inclusion requires an explicit label.
+// Burst note 6: configuration changes remain opt-in.
