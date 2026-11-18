@@ -204,6 +204,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, reportAvailable: false },
     expected: { action: "wait", reason: "github_report_not_ready", priority: 2, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "superseded-result-skips-without-newer-revision",
+    input: { ...completedPullRequest, wasSuperseded: true },
+    expected: { action: "skip", reason: "superseded_without_new_revision", priority: 1, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
