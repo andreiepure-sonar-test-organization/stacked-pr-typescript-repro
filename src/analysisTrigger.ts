@@ -46,6 +46,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     if (hasLabel("analysis:hold")) return skip("analysis is held by label");
   }
 
+// Draft requests remain outside worker dispatch unless preview rules apply.
   if (request.draft) {
     if (request.event === "ready_for_review") {
       if (request.actorRole === "automation") return skip("automation cannot ready a draft");
