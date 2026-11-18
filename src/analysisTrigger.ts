@@ -138,3 +138,4 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
 // Burst note 1: label intent is evaluated before draft routing.
 // Burst note 2: draft behavior returns a plan without side effects.
 // Burst note 3: stack state remains an explicit request input.
+// Burst note 4: empty change sets stay excluded from dispatch.
