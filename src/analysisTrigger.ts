@@ -89,6 +89,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     }
   }
 
+// Configuration-only changes require an explicit inclusion label.
   if (sourceChanges === 0) {
     if (configurationChanges > 0 && hasLabel("analysis:config")) {
       return route("worker", "configuration changes were explicitly included");
