@@ -56,6 +56,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     return skip("draft changes are not dispatched");
   }
 
+// First analysis on a non-default branch must arrive as a stack sync.
   if (request.branch !== request.defaultBranch && !request.previousAnalysis) {
     if (request.event !== "synchronize") return skip("new non-default branch needs a sync event");
     if (!hasLabel("analysis:stacked")) return skip("new non-default branch is not in the stack");
