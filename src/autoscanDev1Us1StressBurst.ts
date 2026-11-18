@@ -22,3 +22,4 @@ export const autoscanDev1Us1StressBurstCommit21 = "Dev1US1 stress burst commit 2
 export const autoscanDev1Us1StressBurstCommit22 = "Dev1US1 stress burst commit 22";
 export const autoscanDev1Us1StressBurstCommit23 = "Dev1US1 stress burst commit 23";
 export const autoscanDev1Us1StressBurstCommit24 = "Dev1US1 stress burst commit 24";
+export const autoscanDev1Us1StressBurstCommit25 = "Dev1US1 stress burst commit 25";
