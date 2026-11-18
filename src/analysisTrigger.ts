@@ -40,6 +40,7 @@ const route = (
 export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAnalysisPlan => {
   const hasLabel = (label: string): boolean => request.labels.includes(label);
 
+// Fixture handling starts with explicit label intent.
   if (request.event === "labeled") {
     if (!hasLabel("analysis:run")) return skip("label event did not request analysis");
     if (hasLabel("analysis:hold")) return skip("analysis is held by label");
