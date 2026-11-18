@@ -138,6 +138,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, runningJobs: 2, changedFiles: 101 },
     expected: { action: "wait", reason: "large_change_deferred", priority: 3, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "eligible-batch-slot-starts",
+    input: { ...readyQueueInput, sequence: 3, queuedJobs: 2, runningJobs: 1, changedFiles: 25 },
+    expected: { action: "start", reason: "eligible_batch_slot", priority: 6, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
