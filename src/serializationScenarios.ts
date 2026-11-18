@@ -192,6 +192,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 2, isDefaultBranch: true, hasBaseAnalysis: false },
     expectedScore: 1,
   },
+  {
+    kind: "completion",
+    name: "unfinished-analysis-waits-for-completion",
+    input: { ...completedPullRequest, analysisFinished: false },
+    expected: { action: "wait", reason: "analysis_still_running", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
