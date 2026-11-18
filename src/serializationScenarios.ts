@@ -48,6 +48,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, queuedJobs: 8 },
     expected: { action: "wait", reason: "queue_capacity_reached", priority: 1, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "large-change-waits-during-peak",
+    input: { ...readyQueueInput, queuedJobs: 2, runningJobs: 4, changedFiles: 25 },
+    expected: { action: "wait", reason: "large_change_during_peak", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
