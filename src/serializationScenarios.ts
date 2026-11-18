@@ -96,6 +96,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: completedPullRequest,
     expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "invalid-sequence-is-skipped",
+    input: { ...readyQueueInput, sequence: 0 },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
