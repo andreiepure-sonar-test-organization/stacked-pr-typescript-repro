@@ -132,6 +132,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "azure", isDefaultBranch: true, isDraft: true },
     expected: { action: "wait", reason: "azure_draft_requires_review", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "very-large-change-defers-with-active-work",
+    input: { ...readyQueueInput, runningJobs: 2, changedFiles: 101 },
+    expected: { action: "wait", reason: "large_change_deferred", priority: 3, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
