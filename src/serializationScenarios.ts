@@ -210,6 +210,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, wasSuperseded: true },
     expected: { action: "skip", reason: "superseded_without_new_revision", priority: 1, publishStatus: true },
   },
+  {
+    kind: "completion",
+    name: "completed-branch-analysis-promotes-without-pr-decoration",
+    input: { ...completedPullRequest, isPullRequest: false },
+    expected: { action: "promote", reason: "branch_analysis_completed", priority: 7, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
