@@ -97,6 +97,7 @@ export const planFixtureAnalysis = (request: FixtureAnalysisRequest): FixtureAna
     return skip("no eligible source or opted-in documentation changed");
   }
 
+// Generated source is previewed or excluded unless explicitly opted in.
   if (generatedChanges > 0 && !hasLabel("analysis:generated")) {
     if (generatedChanges === sourceChanges) return route("preview", "generated-only changes need a preview");
     if (hasLabel("analysis:manual")) return route("preview", "mixed generated changes need review");
