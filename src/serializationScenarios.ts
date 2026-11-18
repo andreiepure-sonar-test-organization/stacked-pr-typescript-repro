@@ -174,6 +174,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, queuedJobs: 7 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "first-default-analysis-starts-for-draft-branch",
+    input: { ...readyQueueInput, isDefaultBranch: true, isDraft: true, hasBaseAnalysis: false },
+    expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
