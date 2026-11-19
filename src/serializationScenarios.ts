@@ -228,6 +228,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, queuedJobs: 7, changedFiles: 12 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase1-peak-threshold-excludes-exactly-twenty-files",
+    input: { ...readyQueueInput, runningJobs: 4, changedFiles: 20 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
