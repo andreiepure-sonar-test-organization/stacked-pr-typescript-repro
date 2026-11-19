@@ -510,6 +510,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, queuedJobs: 2, runningJobs: 2, changedFiles: 0 },
     expectedScore: 5,
   },
+  {
+    kind: "completion",
+    name: "followup-phase2-branch-completion-waits-for-missing-report",
+    input: { ...completedPullRequest, isPullRequest: false, reportAvailable: false },
+    expected: { action: "wait", reason: "analysis_report_missing", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
