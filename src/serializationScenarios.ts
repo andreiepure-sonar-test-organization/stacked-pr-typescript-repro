@@ -336,6 +336,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "gitlab", hasNewerRevision: true },
     expected: { action: "skip", reason: "gitlab_decoration_obsolete", priority: 0, publishStatus: true },
   },
+  {
+    kind: "completion",
+    name: "postdeploy-phase2-branch-completion-does-not-require-pr-decoration",
+    input: { ...completedPullRequest, isPullRequest: false, decorationReady: false, hasNewerRevision: true },
+    expected: { action: "promote", reason: "branch_analysis_completed", priority: 7, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
