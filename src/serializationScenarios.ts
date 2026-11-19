@@ -288,6 +288,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "gitlab", readiness: "pending", changedFiles: 0 },
     expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase2-azure-default-draft-waits-even-with-base-analysis",
+    input: { ...readyQueueInput, platform: "azure", isDefaultBranch: true, isDraft: true, hasBaseAnalysis: true },
+    expected: { action: "wait", reason: "azure_draft_requires_review", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
