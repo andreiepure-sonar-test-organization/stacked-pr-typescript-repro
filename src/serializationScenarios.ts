@@ -234,6 +234,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, runningJobs: 4, changedFiles: 20 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase1-unsafe-sequence-above-safe-integer-is-skipped",
+    input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER + 1 },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
