@@ -366,6 +366,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, isDefaultBranch: true, hasBaseAnalysis: false, queuedJobs: 8 },
     expected: { action: "wait", reason: "queue_capacity_reached", priority: 1, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "corrected-phase1-azure-empty-change-starts",
+    input: { ...readyQueueInput, platform: "azure", changedFiles: 0 },
+    expected: { action: "start", reason: "empty_serialization_lane", priority: 8, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
