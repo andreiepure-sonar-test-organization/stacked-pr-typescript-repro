@@ -402,6 +402,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "gitlab" },
     expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-infinite-sequence-is-skipped",
+    input: { ...readyQueueInput, sequence: Infinity },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
