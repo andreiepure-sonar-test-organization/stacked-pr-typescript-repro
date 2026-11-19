@@ -462,6 +462,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, decorationReady: false },
     expected: { action: "wait", reason: "decoration_pending", priority: 3, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase2-nan-sequence-is-skipped",
+    input: { ...readyQueueInput, sequence: Number.NaN },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
