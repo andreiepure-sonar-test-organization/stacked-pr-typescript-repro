@@ -492,6 +492,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 3, queuedJobs: 7, runningJobs: 1, changedFiles: 12 },
     expected: { action: "start", reason: "eligible_batch_slot", priority: 6, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "followup-phase2-blocked-gitlab-empty-change-waits-before-empty-change-check",
+    input: { ...readyQueueInput, platform: "gitlab", readiness: "blocked", changedFiles: 0 },
+    expected: { action: "wait", reason: "readiness_blocked", priority: 1, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
