@@ -354,6 +354,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Number.MIN_SAFE_INTEGER },
     expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "corrected-phase1-conflict-precedes-pending-readiness",
+    input: { ...readyQueueInput, readiness: "pending", hasConflicts: true },
+    expected: { action: "skip", reason: "merge_conflict", priority: 0, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
