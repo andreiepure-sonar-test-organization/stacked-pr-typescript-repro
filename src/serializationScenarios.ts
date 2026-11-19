@@ -438,6 +438,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, runningJobs: 2, changedFiles: 100 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-default-first-analysis-still-waits-for-pending-readiness",
+    input: { ...readyQueueInput, readiness: "pending", isDefaultBranch: true, hasBaseAnalysis: false },
+    expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
