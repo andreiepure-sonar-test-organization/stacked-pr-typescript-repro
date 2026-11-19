@@ -246,6 +246,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, queuedJobs: -1, runningJobs: -2, changedFiles: -4 },
     expectedScore: 1,
   },
+  {
+    kind: "pressure",
+    name: "postdeploy-phase1-change-count-forty-uses-middle-pressure-band",
+    input: { ...readyQueueInput, sequence: 5, changedFiles: 40 },
+    expectedScore: 4,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
