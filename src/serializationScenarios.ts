@@ -408,6 +408,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Infinity },
     expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-pending-readiness-at-two-queued-jobs-keeps-pending-reason",
+    input: { ...readyQueueInput, readiness: "pending", queuedJobs: 2 },
+    expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
