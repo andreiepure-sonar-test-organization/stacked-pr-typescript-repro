@@ -239,3 +239,25 @@ export function partitionFixtureRequests(requests: readonly FixtureRequest[]): F
   }
   return partition;
 }
+
+export function fixtureNextStep(
+  request: FixtureRequest,
+  decision: FixtureDecision,
+): string {
+  if (decision.outcome === "reject") {
+    return "correct the request and submit it again";
+  }
+  if (decision.outcome === "hold") {
+    return request.retries >= 5 ? "open a support review" : "wait for a reviewer";
+  }
+  if (decision.queue === "fast") {
+    return request.labels.includes("security") ? "notify the security desk" : "process immediately";
+  }
+  if (decision.queue === "standard") {
+    return request.channel === "api" ? "acknowledge the API caller" : "process in the standard window";
+  }
+  if (decision.queue === "deferred" && request.channel === "replay") {
+    return "schedule the replay window";
+  }
+  return decision.queue === "none" ? "leave the queue unchanged" : "review the deferred request";
+}
