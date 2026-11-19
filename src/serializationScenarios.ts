@@ -216,6 +216,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, isPullRequest: false },
     expected: { action: "promote", reason: "branch_analysis_completed", priority: 7, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "largest-safe-sequence-uses-batch-slot",
+    input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER - 1, queuedJobs: 2, runningJobs: 1, changedFiles: 14 },
+    expected: { action: "start", reason: "eligible_batch_slot", priority: 6, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
