@@ -300,6 +300,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, runningJobs: 4, changedFiles: 21 },
     expected: { action: "wait", reason: "large_change_during_peak", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase2-large-change-deferral-requires-more-than-one-running-job",
+    input: { ...readyQueueInput, queuedJobs: 1, runningJobs: 1, changedFiles: 101 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
