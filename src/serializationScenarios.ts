@@ -348,6 +348,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER },
     expected: { action: "start", reason: "empty_serialization_lane", priority: 8, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "corrected-phase1-minimum-sequence-is-rejected",
+    input: { ...readyQueueInput, sequence: Number.MIN_SAFE_INTEGER },
+    expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
