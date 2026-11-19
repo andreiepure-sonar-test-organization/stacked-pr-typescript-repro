@@ -390,6 +390,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, changedFiles: 10 },
     expectedScore: 2,
   },
+  {
+    kind: "completion",
+    name: "corrected-phase1-azure-decoration-ready-promotes-without-newer-revision",
+    input: { ...completedPullRequest, platform: "azure" },
+    expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
