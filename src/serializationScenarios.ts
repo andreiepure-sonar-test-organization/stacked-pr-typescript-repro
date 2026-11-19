@@ -468,6 +468,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Number.NaN },
     expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase2-blocked-readiness-precedes-full-queue",
+    input: { ...readyQueueInput, readiness: "blocked", queuedJobs: 8 },
+    expected: { action: "wait", reason: "readiness_blocked", priority: 1, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
