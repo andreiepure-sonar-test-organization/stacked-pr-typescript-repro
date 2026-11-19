@@ -414,6 +414,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "pending", queuedJobs: 2 },
     expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-ready-azure-conflict-skips-with-status",
+    input: { ...readyQueueInput, platform: "azure", hasConflicts: true },
+    expected: { action: "skip", reason: "merge_conflict", priority: 0, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
