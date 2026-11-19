@@ -504,6 +504,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 10, changedFiles: 0 },
     expectedScore: 1,
   },
+  {
+    kind: "pressure",
+    name: "followup-phase2-two-queued-and-running-jobs-pressure-score",
+    input: { ...readyQueueInput, sequence: 5, queuedJobs: 2, runningJobs: 2, changedFiles: 0 },
+    expectedScore: 5,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
