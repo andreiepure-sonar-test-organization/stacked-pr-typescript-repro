@@ -330,6 +330,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "azure", hasNewerRevision: true },
     expected: { action: "wait", reason: "azure_revision_confirmation_required", priority: 2, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "postdeploy-phase2-gitlab-newer-revision-skips-obsolete-decoration",
+    input: { ...completedPullRequest, platform: "gitlab", hasNewerRevision: true },
+    expected: { action: "skip", reason: "gitlab_decoration_obsolete", priority: 0, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
