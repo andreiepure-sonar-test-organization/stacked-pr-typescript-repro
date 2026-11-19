@@ -276,6 +276,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "gitlab", reportAvailable: false },
     expected: { action: "wait", reason: "gitlab_report_not_ready", priority: 2, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "postdeploy-phase1-azure-missing-report-uses-generic-wait",
+    input: { ...completedPullRequest, platform: "azure", reportAvailable: false },
+    expected: { action: "wait", reason: "analysis_report_missing", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
