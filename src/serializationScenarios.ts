@@ -396,6 +396,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "azure" },
     expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
   },
+  {
+    kind: "completion",
+    name: "corrected-phase1-gitlab-decoration-ready-promotes-without-newer-revision",
+    input: { ...completedPullRequest, platform: "gitlab" },
+    expected: { action: "promote", reason: "pull_request_decoration_ready", priority: 8, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
