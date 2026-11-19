@@ -294,6 +294,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "azure", isDefaultBranch: true, isDraft: true, hasBaseAnalysis: true },
     expected: { action: "wait", reason: "azure_draft_requires_review", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase2-peak-deferral-starts-above-four-running-and-twenty-files",
+    input: { ...readyQueueInput, runningJobs: 4, changedFiles: 21 },
+    expected: { action: "wait", reason: "large_change_during_peak", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
