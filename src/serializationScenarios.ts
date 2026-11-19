@@ -384,6 +384,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, runningJobs: 4, changedFiles: 0 },
     expectedScore: 8,
   },
+  {
+    kind: "pressure",
+    name: "corrected-phase1-ten-changed-files-stay-in-low-change-band",
+    input: { ...readyQueueInput, sequence: 5, changedFiles: 10 },
+    expectedScore: 2,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
