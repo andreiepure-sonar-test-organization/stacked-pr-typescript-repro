@@ -240,6 +240,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER + 1 },
     expected: { action: "skip", reason: "invalid_sequence", priority: 0, publishStatus: false },
   },
+  {
+    kind: "pressure",
+    name: "postdeploy-phase1-negative-pressure-inputs-clamp-to-zero",
+    input: { ...readyQueueInput, sequence: 5, queuedJobs: -1, runningJobs: -2, changedFiles: -4 },
+    expectedScore: 1,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
