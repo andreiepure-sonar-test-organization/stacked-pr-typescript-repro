@@ -222,6 +222,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER - 1, queuedJobs: 2, runningJobs: 1, changedFiles: 14 },
     expected: { action: "start", reason: "eligible_batch_slot", priority: 6, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase1-capacity-minus-one-falls-through-to-lane-owner",
+    input: { ...readyQueueInput, queuedJobs: 7, changedFiles: 12 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
