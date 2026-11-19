@@ -426,6 +426,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, isDraft: true, hasBaseAnalysis: false },
     expected: { action: "wait", reason: "draft_pull_request", priority: 1, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-default-first-analysis-precedes-large-change-deferral",
+    input: { ...readyQueueInput, isDefaultBranch: true, hasBaseAnalysis: false, runningJobs: 1, changedFiles: 101 },
+    expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
