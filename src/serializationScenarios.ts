@@ -270,6 +270,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, queuedJobs: 10, changedFiles: 0 },
     expectedScore: 14,
   },
+  {
+    kind: "completion",
+    name: "postdeploy-phase1-gitlab-missing-report-waits-with-specific-reason",
+    input: { ...completedPullRequest, platform: "gitlab", reportAvailable: false },
+    expected: { action: "wait", reason: "gitlab_report_not_ready", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
