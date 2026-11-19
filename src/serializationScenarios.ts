@@ -312,6 +312,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, runningJobs: 2, changedFiles: 101 },
     expected: { action: "wait", reason: "large_change_deferred", priority: 3, publishStatus: false },
   },
+  {
+    kind: "pressure",
+    name: "postdeploy-phase2-three-running-jobs-use-middle-running-pressure-band",
+    input: { ...readyQueueInput, sequence: 5, runningJobs: 3, changedFiles: 0 },
+    expectedScore: 8,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
