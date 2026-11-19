@@ -187,3 +187,34 @@ export function explainFixtureBatch(requests: readonly FixtureRequest[]): string
   }
   return lines;
 }
+
+export function estimateFixtureWaitMinutes(
+  request: FixtureRequest,
+  decision: FixtureDecision,
+): number {
+  if (decision.outcome === "reject" || decision.queue === "none") {
+    return 0;
+  }
+  if (decision.outcome === "hold") {
+    return request.retries >= 5 ? 240 : 60;
+  }
+  if (decision.queue === "fast") {
+    if (request.labels.includes("security")) {
+      return 2;
+    }
+    if (request.labels.includes("customer-impact")) {
+      return 5;
+    }
+    return 10;
+  }
+  if (decision.queue === "standard") {
+    if (request.channel === "api" && request.priority >= 80) {
+      return 15;
+    }
+    return request.region === "eu" ? 25 : 35;
+  }
+  if (request.channel === "replay") {
+    return 180;
+  }
+  return request.channel === "manual" ? 90 : 120;
+}
