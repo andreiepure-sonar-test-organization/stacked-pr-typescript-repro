@@ -480,6 +480,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, queuedJobs: 2, runningJobs: 1, changedFiles: 12 },
     expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "followup-phase2-batch-slot-requires-fewer-than-two-running-jobs",
+    input: { ...readyQueueInput, sequence: 3, runningJobs: 2, changedFiles: 12 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
