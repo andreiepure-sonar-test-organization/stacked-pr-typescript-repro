@@ -432,6 +432,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, isDefaultBranch: true, hasBaseAnalysis: false, runningJobs: 1, changedFiles: 101 },
     expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "followup-phase1-exactly-one-hundred-files-do-not-defer",
+    input: { ...readyQueueInput, runningJobs: 2, changedFiles: 100 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
