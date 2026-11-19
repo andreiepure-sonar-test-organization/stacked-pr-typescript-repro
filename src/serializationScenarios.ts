@@ -516,6 +516,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, isPullRequest: false, reportAvailable: false },
     expected: { action: "wait", reason: "analysis_report_missing", priority: 1, publishStatus: false },
   },
+  {
+    kind: "completion",
+    name: "followup-phase2-unfinished-superseded-analysis-waits-for-completion",
+    input: { ...completedPullRequest, analysisFinished: false, wasSuperseded: true },
+    expected: { action: "wait", reason: "analysis_still_running", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
