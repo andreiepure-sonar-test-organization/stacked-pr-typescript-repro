@@ -360,6 +360,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "pending", hasConflicts: true },
     expected: { action: "skip", reason: "merge_conflict", priority: 0, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "corrected-phase1-queue-capacity-precedes-default-branch-analysis",
+    input: { ...readyQueueInput, isDefaultBranch: true, hasBaseAnalysis: false, queuedJobs: 8 },
+    expected: { action: "wait", reason: "queue_capacity_reached", priority: 1, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
