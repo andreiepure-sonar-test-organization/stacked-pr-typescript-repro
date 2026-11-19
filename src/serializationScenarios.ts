@@ -342,6 +342,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, isPullRequest: false, decorationReady: false, hasNewerRevision: true },
     expected: { action: "promote", reason: "branch_analysis_completed", priority: 7, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "corrected-phase1-valid-maximum-sequence-starts-empty-lane",
+    input: { ...readyQueueInput, sequence: Number.MAX_SAFE_INTEGER },
+    expected: { action: "start", reason: "empty_serialization_lane", priority: 8, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
