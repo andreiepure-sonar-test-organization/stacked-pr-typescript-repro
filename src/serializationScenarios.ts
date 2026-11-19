@@ -474,6 +474,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "blocked", queuedJobs: 8 },
     expected: { action: "wait", reason: "readiness_blocked", priority: 1, publishStatus: true },
   },
+  {
+    kind: "queue",
+    name: "followup-phase2-twelve-files-do-not-enter-small-change-fast-lane",
+    input: { ...readyQueueInput, queuedJobs: 2, runningJobs: 1, changedFiles: 12 },
+    expected: { action: "wait", reason: "earlier_revision_owns_lane", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
