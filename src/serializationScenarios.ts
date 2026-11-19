@@ -324,6 +324,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, runningJobs: 5, changedFiles: 0 },
     expectedScore: 12,
   },
+  {
+    kind: "completion",
+    name: "postdeploy-phase2-azure-newer-revision-waits-for-confirmation",
+    input: { ...completedPullRequest, platform: "azure", hasNewerRevision: true },
+    expected: { action: "wait", reason: "azure_revision_confirmation_required", priority: 2, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
