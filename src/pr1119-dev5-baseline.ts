@@ -218,3 +218,24 @@ export function estimateFixtureWaitMinutes(
   }
   return request.channel === "manual" ? 90 : 120;
 }
+
+export interface FixturePartition {
+  ready: FixtureDecision[];
+  review: FixtureDecision[];
+  blocked: FixtureDecision[];
+}
+
+export function partitionFixtureRequests(requests: readonly FixtureRequest[]): FixturePartition {
+  const partition: FixturePartition = { ready: [], review: [], blocked: [] };
+  for (const request of requests) {
+    const decision = decideFixtureRequest(request);
+    if (decision.outcome === "reject") {
+      partition.blocked.push(decision);
+    } else if (decision.outcome === "hold" || decision.queue === "deferred") {
+      partition.review.push(decision);
+    } else if (decision.outcome === "accept") {
+      partition.ready.push(decision);
+    }
+  }
+  return partition;
+}
