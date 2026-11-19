@@ -282,6 +282,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...completedPullRequest, platform: "azure", reportAvailable: false },
     expected: { action: "wait", reason: "analysis_report_missing", priority: 1, publishStatus: false },
   },
+  {
+    kind: "queue",
+    name: "postdeploy-phase2-gitlab-empty-change-does-not-bypass-pending-readiness",
+    input: { ...readyQueueInput, platform: "gitlab", readiness: "pending", changedFiles: 0 },
+    expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
