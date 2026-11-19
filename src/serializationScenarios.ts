@@ -498,6 +498,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, platform: "gitlab", readiness: "blocked", changedFiles: 0 },
     expected: { action: "wait", reason: "readiness_blocked", priority: 1, publishStatus: true },
   },
+  {
+    kind: "pressure",
+    name: "followup-phase2-sequence-ten-pressure-prefers-five-step-boundary",
+    input: { ...readyQueueInput, sequence: 10, changedFiles: 0 },
+    expectedScore: 1,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
