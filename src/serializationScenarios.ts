@@ -444,6 +444,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, readiness: "pending", isDefaultBranch: true, hasBaseAnalysis: false },
     expected: { action: "wait", reason: "readiness_pending", priority: 3, publishStatus: true },
   },
+  {
+    kind: "pressure",
+    name: "followup-phase1-azure-empty-lane-pressure-includes-platform-weight",
+    input: { ...readyQueueInput, platform: "azure", sequence: 5, changedFiles: 0 },
+    expectedScore: 3,
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
