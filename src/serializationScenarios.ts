@@ -456,6 +456,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, sequence: 5, queuedJobs: 3, changedFiles: 0 },
     expectedScore: 6,
   },
+  {
+    kind: "completion",
+    name: "followup-phase1-completed-pull-request-waits-for-decoration",
+    input: { ...completedPullRequest, decorationReady: false },
+    expected: { action: "wait", reason: "decoration_pending", priority: 3, publishStatus: false },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
