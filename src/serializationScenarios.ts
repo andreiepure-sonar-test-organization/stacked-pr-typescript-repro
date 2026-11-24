@@ -56,7 +56,7 @@ export const serializationScenarios: readonly SerializationScenario[] = [
   },
 {
     kind: "queue",
-    name: "first-default-branch-analysis-starts",
+    name: "first-default-branch-analysis-starts-after-retry",
     input: { ...readyQueueInput, hasBaseAnalysis: false, isDefaultBranch: true },
     expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
   },
