@@ -54,6 +54,12 @@ export const serializationScenarios: readonly SerializationScenario[] = [
     input: { ...readyQueueInput, queuedJobs: 2, runningJobs: 4, changedFiles: 25 },
     expected: { action: "wait", reason: "large_change_during_peak", priority: 2, publishStatus: false },
   },
+{
+    kind: "queue",
+    name: "first-default-branch-analysis-starts",
+    input: { ...readyQueueInput, hasBaseAnalysis: false, isDefaultBranch: true },
+    expected: { action: "start", reason: "first_default_branch_analysis", priority: 9, publishStatus: true },
+  },
 ];
 
 function matchesDecision(actual: QueueDecision, expected: QueueDecision): boolean {
