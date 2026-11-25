@@ -3,4 +3,5 @@ export const serializationScenarios = [
   { phase: 'baseline', result: 'legacy' },
   { phase: 'legacy-burst-1', result: 'legacy' },
   { phase: 'legacy-burst-2', result: 'legacy' },
+  { phase: 'legacy-drain', result: 'legacy' },
 ];
